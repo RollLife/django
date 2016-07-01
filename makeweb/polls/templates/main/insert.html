@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<!-- C\Code\mysite\elections\templates\elections\index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>게시판 입력하기</title>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/insert.css' %}">
+</head>
+<body>
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="/">Home</a>
+          {% if not request.session.usid %}
+          <a class="blog-nav-item" href="/login">Login</a>
+          {% endif %}
+          {% if request.session.usid %}
+          <a class="blog-nav-item active" href="/about">about</a>
+          <a class="blog-nav-item" href="/logout">Logout</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+        <div class="container">
+      <div class="blog-header">
+        <h1 class="blog-title">게시판 작성하기!</h1>
+        <p class="lead blog-description">자신의 생각을 널리 펼쳐봅시다!</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">상상의 나래</h2>
+
+            <p>자신이 아는 것, 자신이 알고 싶어하는 것,<br>
+               그리고 타인에게 도움이 되는 글을 써주세요!<br>어떤 글이든지 좋습니다.<br>
+               당신이 생각하고 있는 모든 것을 써주세요!</p><br>
+            <hr>
+          </div><!-- /.blog-main -->
+        </div>
+
+      </div>
+    </div>
+    <form action="/insertaction" method="post">
+    	{% csrf_token %}
+        <label style="margin-left:5px">제목</label>
+        <input class="form-control" type="text" name="insert_title"><br>
+        <label style="margin-left:5px">내용</label>
+        <textarea class="form-control" name="insert_content" style="height: 300px;resize: none;"></textarea><br> 
+        <label style="margin-left:5px">작성자</label>
+        <input class="form-control" type="text" name="insert_writer"><br>        
+        <button type="submit" class="btn btn-default" style="font-family: 'Source Sans Pro', sans-serif;">추가하기</button>
+      </form>
+</body>
+</html>

@@ -1,0 +1,93 @@
+{% load staticfiles %} <!-- css 를 사용하기 위해선 static file을 사용해야 한다.  -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>모두의 블로그</title>
+
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap core CSS -->
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet"> <!--  이렇게  그리고 settings.py 파일에서 또 뭔갈 바꿔주어야 한다. -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="/index">Home</a>
+          {% if not request.session.usid %}
+          <a class="blog-nav-item" href="/login">Login</a>
+          {% endif %}
+          {% if request.session.usid %}
+          <a class="blog-nav-item" href="/about">about</a>
+          <a class="blog-nav-item" href="/logout">Logout</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="blog-header">
+        <h1 class="blog-title">소통 블로그</h1>
+        <p class="lead blog-description">여러가지 이야기를 좋아하는 블로그입니다.</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">사람들과 소통할 수 있는 블로그 </h2>
+            <p class="blog-post-meta">June 30, 2016 by <a href="#">ByeongHo</a></p>
+            {% if not request.session.usid %}
+            <p>많은 사람들과 의견을 나누고 싶어서 이렇게 블로그를 만들어 보았네요.<br>
+              로그인을 하시면 더욱더 자세한 정보를 얻을 수 있습니다.<br> 여러 게임을 하는 사람들과 얘기를 해보세요!</p>
+            {% endif %}
+            {% if request.session.usid %}
+            <p>로그인을 하셨군요! 당신은 이제 모든것을 즐길 수 있습니다!<br>
+            이제 about탭으로 들어가서<br> 자신의 생각의 나래를 펼쳐 보세요!</p>
+            {% endif %}
+            <hr>
+            </blockquote>
+          </div><!-- /.blog-main -->
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
