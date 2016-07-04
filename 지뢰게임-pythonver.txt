@@ -1,0 +1,72 @@
+import random
+
+road = []
+for a in range(0, 200):
+    road.append(0)
+
+mineCount = 0;
+
+while mineCount != 10:
+    mine = random.randrange(1, 101)
+    if road[mine] == 0:
+        road[mine] = 1
+        mineCount = mineCount + 1
+
+for i in range(0, 100):
+    print str(road[i]) + " ",
+    if i % 10 == 0:
+        print "\n"
+
+player1Position = 0
+player2Position = 0
+dice1 = 0
+dice2 = 0
+order = 1
+
+while player1Position < 100 or player2Position < 100:
+    print "\n"
+    print "#####################################"
+    print "player1 : " + str(player1Position) + "Player : " + str(player2Position)
+    print "#####################################"
+    print "\n"
+    print "player" + str(order) + " : "
+    gets = raw_input("input this")
+    clicknext = gets
+    dice1 = random.randrange(1, 7)
+    dice2 = random.randrange(1, 7)
+
+    if order == 1:
+        player1Position = player1Position + dice1 + dice2
+        print "dice1 : {}  dice2 :  {}  result :  {}".format(dice1, dice2, dice1+dice2)
+        print "player1's position is " + str(player1Position)
+        while road[player1Position] == 1:
+            print str(player1Position) + "is mine"
+            player1Position = player1Position - 2
+            print "player1's position is " + str(player1Position)
+        if player1Position >= 100:
+            break
+        if dice1 == dice2:
+            continue
+        if player1Position < 0:
+            player1Position = 0
+        order = 2
+    elif order == 2:
+        player2Position = player2Position + dice1 + dice2
+        print "dice1 : {}  dice2 :  {}  result :  {}".format(dice1, dice2, dice1+dice2)
+        print "player2's position is " + str(player2Position)
+        while road[player2Position] == 1:
+            print str(player2Position) + "is mine"
+            player2Position = player2Position - 2
+            print "player2's position is " + str(player2Position)
+        if player2Position >= 100:
+            break
+        if dice1 == dice2:
+            continue
+        if player2Position < 0:
+            player2Position = 0
+        order = 1
+
+if player1Position > player2Position:
+    print "Player1's win"
+else:
+    print "player2's win"
